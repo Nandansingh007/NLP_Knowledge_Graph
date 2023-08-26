@@ -15,6 +15,8 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.content, 'html.parser')
     
     # Find the article title
+    
+    # The artice title, date and content class is different for different website, inspect it and find it
     title_container = soup.find('div', class_='ok-post-header')
     article_title = title_container.find('h1').get_text().strip()
     
