@@ -1,6 +1,7 @@
 #import necessary library
 import requests
 from bs4 import BeautifulSoup
+import csv
 
 # URL of the article to scrap the data
 article_url = "https://english.onlinekhabar.com/prakriti-where-the-gods-reside.html"
@@ -23,18 +24,27 @@ if response.status_code == 200:
     # Find the article content
     article_content = soup.find('div', class_='ok-details-content-left')
     
-    # Extract paragraphs from the article
-    paragraphs = article_content.find_all('p')
-    
-    # Print the content of each paragraph after excluding specific lines
-    for paragraph in paragraphs:
-        paragraph_text = paragraph.get_text().strip()
+    if article_content:
         
-        # Exclude lines that start with "Home »" or "Kathmandu, ..."
-        if not paragraph_text.startswith("Home »") and not paragraph_text.startswith("Kathmandu, "):
-            print(paragraph_text)
-    
-               
+        # Extract paragraphs from the article
+        paragraphs = article_content.find_all('p')
+        
+        # Extract and save the extracted data to a CSV file
+        csv_filename = "scraped_article.csv"
+        with open(csv_filename, 'w', newline='', encoding='utf-8') as csvfile:
+            csv_writer = csv.writer(csvfile)
+            csv_writer.writerow(["title", "date", "content"])
+            
+            content = ""
+            for paragraph in paragraphs:
+                content += paragraph.get_text().strip() + " "
+            
+            csv_writer.writerow([article_title, article_date, content])
+        
+        print(f"Article data saved to {csv_filename}")
+    else:
+        print("Article content not found on the page.")
+                   
 else:
     print("Failed to fetch the article.")
     
