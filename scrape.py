@@ -2,6 +2,7 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
+import pandas as pd
 
 # URL of the article to scrap the data
 article_url = "https://english.onlinekhabar.com/prakriti-where-the-gods-reside.html"
@@ -49,5 +50,29 @@ if response.status_code == 200:
                    
 else:
     print("Failed to fetch the article.")
+    
+  
+  
+# Load the CSV file
+csv_filename = "./scraped_article.csv"
+data = pd.read_csv(csv_filename)
+  
+# Extract the 'content' column
+content_column = data['content']
+
+# Create a list to store sentences
+sentences_list = []
+
+# Iterate through the content column and split into sentences
+for content in content_column:
+    sentences = content.split('.')  # Split by full stop
+    sentences = [s.strip() for s in sentences if s.strip()]  # Remove empty sentences
+    sentences_list.extend(sentences)
+
+# Create a new DataFrame from the sentences list
+sentences_df = pd.DataFrame({'Sentences': sentences_list})
+
+# Save DataFrame to CSV
+sentences_df.to_csv('sentences.csv', index=False)
     
     
