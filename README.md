@@ -12,7 +12,7 @@ This project aims to build a knowledge graph from text data scraped from Onlinek
 - - [Step 4: Building the Knowledge Graph](#step-4-building-the-knowledge-graph)
 - - [Step 5: Storing the Graph Database](#step-5-storing-the-graph-database)
 - - [Step 6: Question Answering](#step-6-question-answering)
-- - [Library Used](#Libraries Used)
+- - [Step 7: Library Used](#step-7-Libraries-Used)
   
 
 ## Overview
