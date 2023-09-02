@@ -58,7 +58,7 @@ Use the selected graph database to store nodes, relationships, properties, and l
 
 ## Libraries Used
 - NLtk
-- Scipy
+- Spacy
 - beautifulsoup, pandas, matplotlib
 - networkx
 
